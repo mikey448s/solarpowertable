@@ -24,7 +24,7 @@
 
 Home Assistant is not an app. It is a full operating system that specializes in interfacing with smart devices. It faces its inner-workings towards port :8123 which can be access and rendered by another machine on the same network. Accessing Home Assistant on the browser from another machine is the main strength of the software.
 
-*Steps 1-11 **Preparing and Deploying the Home Assistant OS** *
+*Steps 1-11 **Preparing and Deploying the Home Assistant OS***
 - Download the Home Assistant OS: Go to the official Home Assistant (https://www.home-assistant.io/installation/) and download the latest installer specific to your hardware. e.g. "Get Raspberry Pi".
 - Download a Flashing Tool: Download and install balenaEtcher or Rufus on your current working computer.
 - Flash the Drive: Insert a blank USB flash drive (at least 8GB).
@@ -37,7 +37,7 @@ Home Assistant is not an app. It is a full operating system that specializes in 
 	- `network update wlan0 --ipv4-method auto --ipv6-method auto --wifi-auth wpa-psk --wifi-mode infrastructure --wifi-ssid "YOUR_WIFI_NAME" --wifi-psk "YOUR_PASSWORD"`
 	- Run `network info` to verify the assigned IP address.
 
-*Steps 12-20 **Kiosk Mode & Smart Device Integration** *
+*Steps 12-20 **Kiosk Mode & Smart Device Integration***
 
 > HAOS does not natively support an X11 windowing system or desktop environment, meaning the HDMI port outputs a static terminal. To provide a user-facing dashboard on the table without requiring a secondary computer, we utilized a containerized kiosk workaround.
 
@@ -49,12 +49,12 @@ Home Assistant is not an app. It is a full operating system that specializes in 
 - Enable the ZHA (Zigbee Home Automation) integration and pair the four Eightree ET12 smart plugs and the custom FSR-modified contact sensor.
 	- For now, the devices will sit in the area you choose, and further customization will be required.
 
-*Steps 21-31 **Power-Saving Automations & SOC Inference Model** *
+*Steps 21-31 **Power-Saving Automations & SOC Inference Model***
 
 > We introduced a feature to disconnect the 7-inch LCD touchscreen from power using a Smart Plug and Home Assistant Automation. The Raspberry Pi consumes about 3.5W at idle, and the screen consumes about 3W. By correlating the usage status and screen status, we can halve our power footprint when not in use.
 
 - Determine your 'usage' factor. Ours is the Zigbee 3.0 Contact Sensor embedded inside the 3" cushion (detailed in 2.2.2 Other Schematics). This can be an FSR (force sensor) or camera (computer vision).
-	- Use the GUI or custom YAML code to define the action and reaction. Our custom YAML block is located here **[screen_on.yaml](https://github.com/mikey448s/solarpowertable/blob/main/screen_on.yaml) | [[screen_saver.yaml](https://github.com/mikey448s/solarpowertable/blob/main/screen_saver.yaml)**.
+	- Use the GUI or custom YAML code to define the action and reaction. Our custom YAML block is located here **[screen_on.yaml](https://github.com/mikey448s/solarpowertable/blob/main/screen_on.yaml) | [screen_saver.yaml](https://github.com/mikey448s/solarpowertable/blob/main/screen_saver.yaml)**.
 
 > We developed a preliminary prototype for inferring the State of Charge of the Lead-Acid battery installed to the Solar-Powered Study Table. Because the table's inverter converts the DC signal to a constant 120V AC, we cannot monitor the upstream DC voltage of the battery to determine the State of Charge.
 
@@ -79,7 +79,7 @@ Home Assistant is not an app. It is a full operating system that specializes in 
 Configuring the server was a necessary precursor to 2.1.2 (B) Flask Web App and 2.1.2 (C) Tailscale Mesh VPN. Setting up the server properly will allow connections and interactions with the website from anywhere in the world.
 Proxmox is not an app. It is a full operating system that replaces Windows/macOS on the laptop to manage virtual machines with maximum efficiency. It handles the QEMU under the hood to manage multiple Virtual Machines & Containers, which we will take advantage of for the Web App & Mesh VPN.
 
-*Steps 1-19 **Preparing and Installing the Bare Metal Hypervisor (Proxmox VE)** *
+*Steps 1-19 **Preparing and Installing the Bare Metal Hypervisor (Proxmox VE)***
 
 > Before modifying the laptop, you must create a bootable disk for installation.
 
@@ -103,7 +103,7 @@ Proxmox is not an app. It is a full operating system that replaces Windows/macOS
 - Install: Review the summary screen and click Install.
 - Reboot: Once the installation hits 100%, remove the USB drive and click Reboot. The laptop screen will eventually just show a black terminal with a login prompt. Your work on the physical laptop is now done.
 
-*Steps 20-49 **Initializing Proxmox for Virtualization** *
+*Steps 20-49 **Initializing Proxmox for Virtualization***
 
 > You will now control the server entirely from your main computer's web browser. Changes made from the command-line interface should only be done by those who know exactly what they're doing, in my experience.
 
@@ -144,7 +144,7 @@ Proxmox is not an app. It is a full operating system that replaces Windows/macOS
 
 
 #### 2.1.2 (B) Flask Web App
-*Steps 1-19 **Initializing the Web App VM** *
+*Steps 1-19 **Initializing the Web App VM***
 
 > Installing the operating system inside the newly created virtual container.
 
@@ -169,7 +169,7 @@ Proxmox is not an app. It is a full operating system that replaces Windows/macOS
 - With the environment active, install the required web framework and HTTP request libraries: `pip install Flask requests`
 - Using the code available on this Github page developed by our team, place the **[app.py](https://github.com/mikey448s/solarpowertable/blob/main/app.py), [index.html](https://github.com/mikey448s/solarpowertable/blob/main/index.html), and [ha_cache.json](https://github.com/mikey448s/solarpowertable/blob/main/ha_cache.json)** files into this `~/solarpower-app` folder.
 
-*Steps 20-40 **Enabling & Initializing Cloudflare Zero Trust Tunneling for External Access** *
+*Steps 20-40 **Enabling & Initializing Cloudflare Zero Trust Tunneling for External Access***
 
 > Standard web hosting requires opening router ports (Port Forwarding), which is a massive security risk and explicitly blocked by the university network. To safely expose the local localhost:3333 dashboard to a public domain, we deployed a reverse tunnel using Cloudflare.
 
@@ -218,7 +218,7 @@ Proxmox is not an app. It is a full operating system that replaces Windows/macOS
 #### 2.1.2 (C) Tailscale Mesh VPN
 > Allows your team to connect to the Home Assistant Dashboard and the Remote Server anywhere in the world with higher performance than Hub-and-Spoke or ZTNA.
 
-*Steps 1-5 **Installation and Authentication** *
+*Steps 1-5 **Installation and Authentication***
 - Install & Authenticate Tailscale: Start the LXC and open the console.
 	- Update repositories: `apt update && apt upgrade -y`
 - Run the installer: `curl -fsSL https://tailscale.com/install.sh | sh`
