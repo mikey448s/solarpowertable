@@ -2,24 +2,24 @@
 
 
 
-## 1 Brief Description
+# 1 Brief Description
 
-### 1.1 Objective
-
-
-### 1.2 Computer Engineering
+## 1.1 Objective
 
 
-### 1.2 Mechanical Engineering
+## 1.2 Computer Engineering
+
+
+## 1.2 Mechanical Engineering
 
 
 
-## 2 Detailed Installation Steps
+# 2 Detailed Installation Steps
 
 
-### 2.1 Computer Engineering
+## 2.1 Computer Engineering
 
-#### 2.1.1 Home Assistant (Necessary)
+### 2.1.1 Home Assistant (Necessary)
 > The local telemetry hub is hosted on a Raspberry Pi 4B running the dedicated Home Assistant OS appliance. Initial configuration requires a direct hardware interface. Process may look different due to strict AP isolation on the campus network if you cannot initialize on a home network.
 
 Home Assistant is not an app. It is a full operating system that specializes in interfacing with smart devices. It faces its inner-workings towards port :8123 which can be access and rendered by another machine on the same network. Accessing Home Assistant on the browser from another machine is the main strength of the software.
@@ -54,7 +54,7 @@ Home Assistant is not an app. It is a full operating system that specializes in 
 > We introduced a feature to disconnect the 7-inch LCD touchscreen from power using a Smart Plug and Home Assistant Automation. The Raspberry Pi consumes about 3.5W at idle, and the screen consumes about 3W. By correlating the usage status and screen status, we can halve our power footprint when not in use.
 
 - Determine your 'usage' factor. Ours is the Zigbee 3.0 Contact Sensor embedded inside the 3" cushion (detailed in 2.2.2 Other Schematics). This can be an FSR (force sensor) or camera (computer vision).
-	- Use the GUI or custom YAML code to define the action and reaction. Our custom YAML block is located here **[INSERT LINK]**.
+	- Use the GUI or custom YAML code to define the action and reaction. Our custom YAML block is located here **[screen_on.yaml](https://github.com/mikey448s/solarpowertable/blob/main/screen_on.yaml) | [[screen_saver.yaml](https://github.com/mikey448s/solarpowertable/blob/main/screen_saver.yaml)**.
 
 > We developed a preliminary prototype for inferring the State of Charge of the Lead-Acid battery installed to the Solar-Powered Study Table. Because the table's inverter converts the DC signal to a constant 120V AC, we cannot monitor the upstream DC voltage of the battery to determine the State of Charge.
 
@@ -64,15 +64,15 @@ Home Assistant is not an app. It is a full operating system that specializes in 
 	- Apply a heavy load to the plugs until the battery is depleted and the inverter shuts off.
 	- The new total consumption represents the maximum usable capacity of the battery (we expect approximately 800Wh based on Sunbolt documentation).
 - Implement an automation that resets the daily total energy consumed variable at sunset, assuming that the SOC is at its maximum after generating solar power all day.
-	- Use the GUI or custom YAML code to define the action and reaction. Our custom YAML block is located here **[INSERT LINK]**.
+	- Use the GUI or custom YAML code to define the action and reaction. Our custom YAML block is located here **[configurations.yaml](https://github.com/mikey448s/solarpowertable/blob/main/configurations.yaml) | [battery_soc_alerts.yaml](https://github.com/mikey448s/solarpowertable/blob/main/battery_soc_alerts.yaml)**.
 - Implement another automation using YAML to provide notifications at critical charge states (100%, 50%, 20%).
 
-#### 2.1.2 Remote Server (Optional)
+### 2.1.2 Remote Server (Optional)
 
 > This part of the process may look very different depending on existing IoT and webapp infrastructure. This guide will detail all steps true to the FY26 Solar-Powered Study Table's process, and many of the steps below will likely need to be remediated if the existing infrastructure already exists.
 
 
-##### 2.1.2 (A) Proxmox Server
+#### 2.1.2 (A) Proxmox Server
 
 > For the FY26 Solar-Powered Study Table team, converting an old laptop as a server will help extend the reach of the dashboard's telemetry. Users will not have to be physically at the table to learn, and the computer engineers have a chance to show software development and IoT competence.
 
@@ -143,7 +143,7 @@ Proxmox is not an app. It is a full operating system that replaces Windows/macOS
 	- Append this line to allow the unprivileged container to use the `/dev/net/tun` device: `lxc.cgroup2.devices.allow: c 10:200 rwm`
 
 
-##### 2.1.2 (B) Flask Web App
+#### 2.1.2 (B) Flask Web App
 *Steps 1-19 **Initializing the Web App VM** *
 
 > Installing the operating system inside the newly created virtual container.
@@ -167,7 +167,7 @@ Proxmox is not an app. It is a full operating system that replaces Windows/macOS
 - Before installing anything, you must "step inside" (activate) the sandbox. `source solar-venv/bin/activate`
 	- You will know it worked because your command line prompt will now start with (solar-venv).
 - With the environment active, install the required web framework and HTTP request libraries: `pip install Flask requests`
-- Using the code available on this Github page, place your `app.py`, `templates/index.html`, and `ha_cache.json` files into this ~/solarpower-app folder.
+- Using the code available on this Github page developed by our team, place the **[app.py](https://github.com/mikey448s/solarpowertable/blob/main/app.py), [index.html](https://github.com/mikey448s/solarpowertable/blob/main/index.html), and [ha_cache.json](https://github.com/mikey448s/solarpowertable/blob/main/ha_cache.json)** files into this `~/solarpower-app` folder.
 
 *Steps 20-40 **Enabling & Initializing Cloudflare Zero Trust Tunneling for External Access** *
 
@@ -215,7 +215,7 @@ Proxmox is not an app. It is a full operating system that replaces Windows/macOS
 	- Now, if the old laptop loses power and boots back up, your website and public tunnel will automatically restore themselves without you ever having to log in.
 
 
-##### 2.1.2 (C) Tailscale Mesh VPN
+#### 2.1.2 (C) Tailscale Mesh VPN
 > Allows your team to connect to the Home Assistant Dashboard and the Remote Server anywhere in the world with higher performance than Hub-and-Spoke or ZTNA.
 
 *Steps 1-5 **Installation and Authentication** *
@@ -227,8 +227,8 @@ Proxmox is not an app. It is a full operating system that replaces Windows/macOS
 	- All devices you wish to connect to the mesh network with (computers, phones) must install the Tailscale VPN and be approved by the admin account.
 
 
-### 2.2 Mechanical Engineering
+## 2.2 Mechanical Engineering
 
-#### 2.2.1 CAD Files
+### 2.2.1 CAD Files
 
-#### 2.2.2 Other Schematics
+### 2.2.2 Other Schematics

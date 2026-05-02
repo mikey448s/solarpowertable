@@ -1,0 +1,46 @@
+alias: "Telemetry: Battery SOC Threshold Alerts"
+description: "Dispatches notifications at 100%, 50%, and 20% estimated capacity"
+mode: single
+trigger:
+  - platform: numeric_state
+    entity_id: sensor.inferred_battery_soc
+    below: 51
+    above: 49
+    id: "50_percent"
+  - platform: numeric_state
+    entity_id: sensor.inferred_battery_soc
+    below: 21
+    above: 19
+    id: "20_percent"
+  - platform: time
+    at: "07:00:00"
+    id: "morning_reset"
+condition: []
+action:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: "50_percent"
+        sequence:
+          - service: persistent_notification.create
+            data:
+              title: "Battery Level: 50%"
+              message: "The solar table has consumed half of its daily energy budget."
+              
+      - conditions:
+          - condition: trigger
+            id: "20_percent"
+        sequence:
+          - service: persistent_notification.create
+            data:
+              title: "Battery Level Critical: 20%"
+              message: "Energy budget nearly depleted. Consider shedding non-essential loads."
+              
+      - conditions:
+          - condition: trigger
+            id: "morning_reset"
+        sequence:
+          - service: persistent_notification.create
+            data:
+              title: "Battery Reset: 100%"
+              message: "Daily energy consumption tracking has been reset for the new solar cycle."

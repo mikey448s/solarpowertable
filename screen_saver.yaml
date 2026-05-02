@@ -1,0 +1,15 @@
+alias: Screen Saver
+description: ""
+triggers:
+  - type: opened
+    device_id: 594266ca6e7afcb3167f8fc9f68b8c68
+    entity_id: 67438ccd01d7db1753dda422a0f3d03b
+    domain: binary_sensor
+    trigger: device
+conditions: []
+actions:
+  - type: turn_off
+    device_id: 7e7f2b62459eafc20d175f57bfe00093
+    entity_id: 8bbc7dbaa6fa8f44237f963d6938496c
+    domain: switch
+mode: single

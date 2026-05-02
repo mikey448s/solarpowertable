@@ -1,0 +1,18 @@
+# ADD THIS TO YOUR EXISTING configurations.yaml FILE!
+template:
+  - sensor:
+      - name: "Inferred Battery SOC"
+        unit_of_measurement: "%"
+        icon: mdi:battery
+        state: >
+          {% set max_capacity = 420 %}
+          {% set plug1 = states('sensor.smart_plug_1_energy') | float(0) %}
+          {% set plug2 = states('sensor.smart_plug_2_energy') | float(0) %}
+          {% set plug3 = states('sensor.smart_plug_3_energy') | float(0) %}
+          {% set plug4 = states('sensor.smart_plug_4_energy') | float(0) %}
+          
+          {% set total_used = plug1 + plug2 + plug3 + plug4 %}
+          {% set soc = 100 - ((total_used / max_capacity) * 100) %}
+          
+          {# Prevent the value from dropping below 0% #}
+          {{ [soc, 0] | max | round(1) }}
