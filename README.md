@@ -207,14 +207,14 @@ Proxmox is not an app. It is a full operating system that replaces Windows/macOS
 - Paste this code snippet to launch the cloudflared tunnel and the Flask app in one fell swoop:
 	- ```#!/bin/bash
 
-	# 1. Activate the isolated Python environment
-	source /home/solaradmin/solarpower-app/solar-venv/bin/activate
+		# 1. Activate the isolated Python environment
+		source /home/solaradmin/solarpower-app/solar-venv/bin/activate
 
-	# 2. Launch the Cloudflare secure tunnel in the background (&)
-	cloudflared tunnel run solarpower &
+		# 2. Launch the Cloudflare secure tunnel in the background (&)
+		cloudflared tunnel run solarpower &
 
-	# 3. Launch the Flask web server
-	python /home/solaradmin/solarpower-app/app.py```
+		# 3. Launch the Flask web server
+		python /home/solaradmin/solarpower-app/app.py```
 - By default, Linux text files cannot be run as programs. We must grant execution permissions: `chmod +x reboot_sequence.sh`
 
 > To truly make it "just work," we can tell the server to run this script automatically whenever it powers on.
