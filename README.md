@@ -240,4 +240,4 @@ Proxmox is not an app. It is a full operating system that replaces Windows/macOS
 
 ### 2.2.1 CAD Files
 
-All [CAD files](https://github.com/mikey448s/solarpowertable/blob/main/Mechanical 3D Models) are available in this repository for re-fabrication and re-iteration.
+All [CAD files](<https://github.com/mikey448s/solarpowertable/blob/main/Mechanical 3D Models>) are available in this repository for re-fabrication and re-iteration.
