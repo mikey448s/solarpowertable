@@ -193,12 +193,12 @@ Proxmox is not an app. It is a full operating system that replaces Windows/macOS
 - We need to tell the tunnel where to look locally when internet traffic arrives. Create a config file: `nano ~/.cloudflared/config.yml`
 	- Paste the following routing logic (replace `<Tunnel-ID>` with your actual ID):
 	- ```tunnel: <Tunnel-ID>
-	- credentials-file: /home/solaradmin/.cloudflared/<Tunnel-ID>.json
+		credentials-file: /home/solaradmin/.cloudflared/<Tunnel-ID>.json
 
-	- ingress:
-	- hostname: dashboard.yourdomain.com
-	- service: http://localhost:3333
-	- service: http_status:404```
+		ingress:
+		hostname: dashboard.yourdomain.com
+		service: http://localhost:3333
+		service: http_status:404```
 	- Save and exit the text editor (Ctrl+O, Enter, Ctrl+X).
 
 > To prevent the need for manual developer intervention every time the server restarts, we consolidated the startup sequence into a single bash executable.
